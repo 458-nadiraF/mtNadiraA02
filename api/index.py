@@ -75,10 +75,10 @@ class handler(BaseHTTPRequestHandler):
             forward_url = f"https://mt-client-api-v1.london.agiliumtrade.ai/users/current/accounts/{account}/trade"  # Replace with your actual API endpoint
             balance2= float(balance) 
             actType=""
-            if(jenis[0:3]=='LONG')
+            if(jenis[0:3]=='LONG'):
                 lot=float(80/closePrice)
                 tp=float(closePrice*0.05)
-            if(jenis[0:3]=='SHOR')
+            if(jenis[0:3]=='SHOR'):
                 lot=float(60/closePrice)
                 tp=float(closePrice*0.016)
             if(action=="BUY"):
