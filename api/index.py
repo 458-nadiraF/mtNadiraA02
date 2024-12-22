@@ -80,7 +80,7 @@ class handler(BaseHTTPRequestHandler):
                 tp=float(closePrice*0.05)
             if(jenis[0:3]=='SHOR')
                 lot=float(60/closePrice)
-                tp=float(closePrice*0.02)
+                tp=float(closePrice*0.016)
             if(action=="BUY"):
                 actType="ORDER_TYPE_BUY"
                 
