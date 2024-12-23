@@ -77,11 +77,11 @@ class handler(BaseHTTPRequestHandler):
             balance2= float(balance) 
             actType=""
             if(jenis[0:4]=='LONG'):
-                lot=float(35/closePrice)
-                tp=float(closePrice*0.3)
+                lot=float(30/closePrice)
+                tp=float(closePrice*0.11)
             if(jenis[0:4]=='SHOR'):
-                lot=float(35/closePrice)
-                tp=float(closePrice*0.15)
+                lot=float(30/closePrice)
+                tp=float(closePrice*0.11)
             if(action=="BUY"):
                 actType="ORDER_TYPE_BUY"
                 
@@ -91,7 +91,7 @@ class handler(BaseHTTPRequestHandler):
                 "symbol": "XAUUSDm",
                 "actionType": actType,
                 "volume": round(float(lot*balance2), 2),
-                "stopLoss": 40,
+                "stopLoss": 50,
                 "takeProfit": float(tp),
                 "takeProfitUnits": "RELATIVE_PIPS",
                 "stopLossUnits":"RELATIVE_BALANCE_PERCENTAGE",
