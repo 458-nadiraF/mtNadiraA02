@@ -77,11 +77,11 @@ class handler(BaseHTTPRequestHandler):
             balance2= float(balance) 
             actType=""
             if(jenis[0:4]=='LONG'):
-                lot=float(40/closePrice)
-                tp=float(closePrice*0.5)
+                lot=float(35/closePrice)
+                tp=float(closePrice*0.3)
             if(jenis[0:4]=='SHOR'):
-                lot=float(40/closePrice)
-                tp=float(closePrice*0.16)
+                lot=float(35/closePrice)
+                tp=float(closePrice*0.15)
             if(action=="BUY"):
                 actType="ORDER_TYPE_BUY"
                 
