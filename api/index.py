@@ -142,6 +142,7 @@ class handler(BaseHTTPRequestHandler):
                     json=log_message,
                     headers=headers2
                 )
+            print(response_data)
             if response.status_code == 200:
                 return None
             else:
