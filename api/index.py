@@ -91,8 +91,8 @@ class handler(BaseHTTPRequestHandler):
                 "symbol": "XAUUSDm",
                 "actionType": actType,
                 "volume": round(float(lot*balance2), 2),
-                "stopLoss": float(tp),
-                "takeProfit": float(tp),
+                "stopLoss": 50,
+                "takeProfit": 50
                 "takeProfitUnits": "RELATIVE_POINTS",
                 "stopLossUnits":"RELATIVE_POINTS",
                 "comment":f"{messageSplit[0:1]}"
