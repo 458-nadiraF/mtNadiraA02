@@ -92,7 +92,7 @@ class handler(BaseHTTPRequestHandler):
                 "actionType": actType,
                 "volume": round(float(lot*balance2), 2),
                 "stopLoss": 50,
-                "takeProfit": 50
+                "takeProfit": 50,
                 "takeProfitUnits": "RELATIVE_POINTS",
                 "stopLossUnits":"RELATIVE_POINTS",
                 "comment":f"{messageSplit[0:1]}"
