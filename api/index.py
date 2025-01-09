@@ -54,10 +54,9 @@ class handler(BaseHTTPRequestHandler):
             #received_json = json.loads(post_data.decode('utf-8'))
             message=received_json.get('plain')
             messageSplit=message.split()
-            closePrice1=messageSplit[2]
-            closePrice=float(closePrice1.split('\n')[0])
-            action=messageSplit[0]
-            jenis=messageSplit[1]
+            closePrice1=messageSplit[1]
+            closePrice=closePrice1.split('\n')[0]
+            action=messageSplit[0] 
             # accountName=received_json.get('account')
             accountStr=f'ACCOUNT_ID'
             tokenStr=f'METAAPI_TOKEN'
@@ -76,27 +75,25 @@ class handler(BaseHTTPRequestHandler):
             forward_url = f"https://mt-client-api-v1.london.agiliumtrade.ai/users/current/accounts/{account}/trade"  # Replace with your actual API endpoint
             balance2= float(balance) 
             actType=""
-            if(jenis[0:4]=='LONG'):
-                lot=float(20/closePrice)
-                tp=float(closePrice*0.04)
-            if(jenis[0:4]=='SHOR'):
-                lot=float(20/closePrice)
-                tp=float(closePrice*0.04)
-            if(action=="BUY"):
-                actType="ORDER_TYPE_BUY"
-                
-            if(action=="SELL") :
-                actType="ORDER_TYPE_SELL"
-            buy_json={
-                "symbol": "XAUUSDm",
-                "actionType": actType,
-                "volume": round(float(lot*balance2), 2),
-                "stopLoss": 50,
-                "takeProfit": float(tp),
-                "takeProfitUnits": "RELATIVE_PIPS",
-                "stopLossUnits":"RELATIVE_BALANCE_PERCENTAGE",
-                "comment":f"{messageSplit[0:1]}"
-            }
+            if action=="BUY" or action=="SELL":
+                if(action=="BUY"):
+                    actType="ORDER_TYPE_BUY"
+                    
+                if(action=="SELL") :
+                    actType="ORDER_TYPE_SELL"
+                lot=0.6*balance2/(0.2*float(closePrice))
+                sll=float(closePrice)*(0.002)*100
+                buy_json={
+                    "symbol": "XAUUSDm",
+                    "actionType": actType,
+                    "volume": round(float(lot), 2),
+                    "stopLoss": sll,
+                    "stopLossUnits":"RELATIVE_PIPS"
+                }
+            if(action=="EXIT"):
+                buy_json={
+                    "symbol": "XAUUSDm",
+                    "actionType": "POSITIONS_CLOSE_SYMBOL"                }
             
             headers = {
                 'Accept': 'application/json',
@@ -128,7 +125,7 @@ class handler(BaseHTTPRequestHandler):
             self.wfile.write(json.dumps(response_data).encode())
            
             log_message = (
-                f" MTNadira. Execution Duration: {execution_duration}ms\n"
+                f" MTNadira A02. Execution Duration: {execution_duration}ms\n"
                 f"Response Content: {response_data}\n"
                 "-------------------------------------------\n"
             )
