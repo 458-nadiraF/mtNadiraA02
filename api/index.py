@@ -76,13 +76,13 @@ class handler(BaseHTTPRequestHandler):
             balance2= float(balance) 
             actType=""
             if action=="BUY" or action=="SELL":
-                #if(action=="BUY"):
-                #   actType="ORDER_TYPE_BUY"
+                if(action=="BUY"):
+                  actType="ORDER_TYPE_BUY"
                     
-                #if(action=="SELL") :
-                actType="ORDER_TYPE_SELL"
-                lot=0.6*balance2/(0.2*float(closePrice))
-                sll=float(closePrice)*(0.002)*100
+                if(action=="SELL") :
+                    actType="ORDER_TYPE_SELL"
+                lot=0.8*balance2/(0.16*float(closePrice))
+                sll=float(closePrice)*(0.0016)*100
                 buy_json={
                     "symbol": "XAUUSDm",
                     "actionType": actType,
